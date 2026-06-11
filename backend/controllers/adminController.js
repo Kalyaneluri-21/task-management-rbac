@@ -87,7 +87,7 @@ const deleteAnyTask = async (req, res) => {
       });
     }
 
-    await logActivity(req.user.userId, "ADMIN_DELETED_TASK", deletedTask._id);
+    await logActivity(req.user.userId, req.user.name, "ADMIN_DELETED_TASK", deletedTask._id, deletedTask.title);
 
     res.status(200).json({
       message: "Task deleted successfully",

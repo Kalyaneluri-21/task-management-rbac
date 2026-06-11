@@ -11,7 +11,7 @@ const createTask = async (req, res) => {
       createdBy: req.user.userId,
     });
 
-    await logActivity(req.user.userId, "TASK_CREATED", task._id);
+    await logActivity(req.user.userId, req.user.name, "TASK_CREATED", task._id, task.title);
 
     res.status(201).json(task);
   } catch (error) {
@@ -52,7 +52,7 @@ const updateTask = async (req, res) => {
       });
     }
 
-    await logActivity(req.user.userId, "TASK_UPDATED", updatedTask._id);
+    await logActivity(req.user.userId, req.user.name, "TASK_UPDATED", updatedTask._id, updatedTask.title);
 
     res.status(200).json(updatedTask);
   } catch (error) {
@@ -75,7 +75,7 @@ const deleteTask = async (req, res) => {
       });
     }
 
-    await logActivity(req.user.userId, "TASK_DELETED", deletedTask._id);
+    await logActivity(req.user.userId, req.user.name, "TASK_DELETED", deletedTask._id, deletedTask.title);
 
     res.status(200).json({
       message: "Task deleted successfully",
