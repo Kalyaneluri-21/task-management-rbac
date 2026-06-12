@@ -66,7 +66,7 @@ The system tracks and stores:
 
 * Node.js
 * Express.js
-* MongoDB
+* MongoDB Atlas
 * Mongoose
 * JWT
 * bcrypt
@@ -122,7 +122,7 @@ cd task_management_rbac
 
 ---
 
-### Backend Setup
+## Backend Setup
 
 Navigate to backend folder:
 
@@ -140,8 +140,16 @@ Create a `.env` file:
 
 ```env
 PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/task_management_rbac
-JWT_SECRET=your_secret_key
+
+MONGO_URI=<your_mongodb_atlas_connection_string>
+
+JWT_SECRET=<your_jwt_secret>
+
+ADMIN_NAME=Admin
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=admin123
+
+FRONTEND_URL=http://localhost:5173
 ```
 
 Start backend server:
@@ -152,30 +160,27 @@ npm run dev
 
 ---
 
-### Create Admin Account
+## Default Admin Account
 
-Navigate to backend folder:
+A default admin account is automatically created when the server starts if one does not already exist.
 
-```bash
-cd backend
-```
-
-Run:
-
-```bash
-node seedAdmin.js
-```
-
-Default Admin Credentials:
+Default Credentials:
 
 ```txt
 Email: admin@example.com
 Password: admin123
 ```
 
+The project also includes a `seedAdmin.js` utility for manual admin creation.
+
+For local development:
+
+```bash
+node seedAdmin.js
+
 ---
 
-### Frontend Setup
+## Frontend Setup
 
 Navigate to frontend folder:
 
@@ -187,6 +192,20 @@ Install dependencies:
 
 ```bash
 npm install
+```
+
+Create a `.env` file:
+
+For local development:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+For production deployment (Vercel):
+
+```env
+VITE_API_URL=https://your-backend.onrender.com/api
 ```
 
 Start frontend:
@@ -250,6 +269,23 @@ npm run dev
 
 ---
 
+## Deployment
+
+### Frontend
+
+* Vercel
+
+### Backend
+
+* Render
+
+### Database
+
+* MongoDB Atlas
+
+---
+
 ## Author
 
 **Kalyan Eluri**
+
